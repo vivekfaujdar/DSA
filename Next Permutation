@@ -1,0 +1,29 @@
+class Solution{
+    static List<Integer> nextPermutation(int N, int a[]){
+        // code here
+        List<Integer> list=new ArrayList<>();
+        int idx1=-1,idx2=-1;
+        
+        for(int i=N-2;i>=0;i--)
+            if(a[i]<a[i+1]) {idx1=i; break;}
+        if(idx1<0){
+            Arrays.sort(a);
+            for(int ele:a) list.add(ele);
+            return list;
+        }
+        for(int i=N-1;i>=idx1;i--) if(a[i]>a[idx1]) {idx2=i; break;}
+        
+        
+        swap(a,idx1,idx2);
+        Arrays.sort(a,idx1+1,N);
+        for(int ele:a) list.add(ele);
+        return list;
+    }
+    static void swap(int[] a,int i,int j){
+        a[i]=a[i]^a[j];
+        a[j]=a[i]^a[j];
+        a[i]=a[i]^a[j];
+        
+    }
+    
+}
